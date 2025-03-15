@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Results</title>
+    <title>Results Overview</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -74,13 +74,21 @@
         fetch('data.json')
             .then(response => response.json())
             .then(data => {
-                document.getElementById('score').innerText = data.score;
-                document.getElementById('feedback').innerText = data.feedback;
-                document.getElementById('reaction').innerText = data.reaction;
-                document.getElementById('memory').innerText = data.memory;
-                document.getElementById('verbal').innerText = data.verbal;
-                document.getElementById('visual').innerText = data.visual;
-            });
+                // Calculate the total score (just an example)
+                let totalScore = data.reduce((sum, item) => sum + item.score, 0);
+                let feedback = "Great job!"; // You can adjust feedback based on the total score or other criteria
+
+                // Set the values in the UI
+                document.getElementById('score').innerText = totalScore;
+                document.getElementById('feedback').innerText = feedback;
+
+                // Iterate through the categories and update the corresponding sections
+                data.forEach(item => {
+                    document.getElementById(item.category.toLowerCase()).innerText = item.score;
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
     </script>
 </body>
 </html>
+
