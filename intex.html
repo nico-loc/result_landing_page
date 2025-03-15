@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 500px;
+        }
+        .result {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            width: 50%;
+        }
+        .summary {
+            padding: 30px;
+            width: 50%;
+        }
+        .summary div {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .reaction { background: #ffe5e5; }
+        .memory { background: #fff5cc; }
+        .verbal { background: #e5fff5; }
+        .visual { background: #e5e9ff; }
+        .button {
+            display: block;
+            text-align: center;
+            background: #2d2f3e;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="result">
+            <h2>Your Result</h2>
+            <h1 id="score">--</h1>
+            <p id="feedback">--</p>
+        </div>
+        <div class="summary">
+            <h3>Summary</h3>
+            <div class="reaction">Reaction: <span id="reaction">--</span>/100</div>
+            <div class="memory">Memory: <span id="memory">--</span>/100</div>
+            <div class="verbal">Verbal: <span id="verbal">--</span>/100</div>
+            <div class="visual">Visual: <span id="visual">--</span>/100</div>
+            <a href="#" class="button">Continue</a>
+        </div>
+    </div>
+
+    <script>
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('score').innerText = data.score;
+                document.getElementById('feedback').innerText = data.feedback;
+                document.getElementById('reaction').innerText = data.reaction;
+                document.getElementById('memory').innerText = data.memory;
+                document.getElementById('verbal').innerText = data.verbal;
+                document.getElementById('visual').innerText = data.visual;
+            });
+    </script>
+</body>
+</html>
